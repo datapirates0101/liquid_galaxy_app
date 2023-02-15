@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  List colors = [Colors.blue, Colors.red, Colors.yellow[700], Colors.green];
+  List buttonName = ['Button1', 'Button2', 'Button3', 'Button4'];
 
   @override
   Widget build(BuildContext context) {
@@ -11,9 +19,7 @@ class HomePage extends StatelessWidget {
         height: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/3.jpeg'),
-            fit: BoxFit.cover,
-          ),
+              image: AssetImage('assets/images/3.jpeg'), fit: BoxFit.cover),
         ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -29,31 +35,12 @@ class HomePage extends StatelessWidget {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.03,
               ),
-              const CustomButtom(
-                text: "Button 1",
-                color: Colors.blue,
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.03,
-              ),
-               const CustomButtom(
-                text: "Button 2",
-                color: Colors.red,
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.03,
-              ),
+
+              for (int i = 0; i < 4; i++)  
                 CustomButtom(
-                text: "Button 3",
-                color: Colors.yellow[700],
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.03,
-              ),
-               const CustomButtom(
-                text: "Button 4",
-                color: Colors.green,
-              ),
+                  text: buttonName[i],
+                  color: colors[i],
+                ),
             ],
           ),
         ),
@@ -69,21 +56,28 @@ class CustomButtom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.06,
-      width: MediaQuery.of(context).size.width * 0.8,
-      child: ElevatedButton(
-        onPressed: () {},
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(color),
-          shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(40),
+    return Column(
+      children: [
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.06,
+          width: MediaQuery.of(context).size.width * 0.8,
+          child: ElevatedButton(
+            onPressed: () {},
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(color),
+              shape: MaterialStateProperty.all(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(40),
+                ),
+              ),
             ),
+            child: Text(text),
           ),
         ),
-        child: Text(text),
-      ),
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.03,
+        ),
+      ],
     );
   }
 }
